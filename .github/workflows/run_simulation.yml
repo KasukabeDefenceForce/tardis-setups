@@ -44,8 +44,6 @@ jobs:
           - name: Run Notebook
             run: jupyter nbconvert docs/quickstart.ipynb --to html --execute --ExecutePreprocessor.timeout=6000
 
-          - name: Setup tmate session     
-            uses: mxschmitt/action-tmate@v3
         #   - uses: actions/upload-artifact@v4
         #     with:
         #       name: 
