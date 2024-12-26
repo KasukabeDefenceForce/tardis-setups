@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 env:
-  PYTEST_FLAGS: --tardis-regression-data=${{ github.workspace }}/tardis-regression-data
+  PYTEST_FLAGS: --tardis-regression-data=tardis-setups/tardis-regression-data
 defaults:
   run:
     shell: bash -l {0}
@@ -27,7 +27,6 @@ jobs:
           repository: tardis-sn/tardis
           token: ${{ secrets.TARDIS_TOKEN }}
           ref: ${{ matrix.tardis-version }}
-          path: tardis
 
       - name: Generate Cache Key
         id: cache-environment-key
