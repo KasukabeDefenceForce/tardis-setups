@@ -21,9 +21,10 @@ jobs:
                 repository: tardis-sn/tardis
                 token: ${{ secrets.TARDIS_TOKEN }}
         
-          - name: Update pip and install Jupyter
+          - name: Install Jupyter and tardis
             run: |
                 pip install --upgrade pip jupyter 
+                pip install -e .
         
           - name: Verify Notebook File
             run: ls docs/
