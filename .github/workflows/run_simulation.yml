@@ -20,6 +20,10 @@ jobs:
                 repository: tardis-sn/tardis
                 path: group-data
                 token: ${{ secrets.TARDIS_TOKEN }}
+        
+          - name: Update pip and install Jupyter and Pandas
+            run: |
+                pip install --upgrade pip jupyter 
 
           - name: Run Notebook
             run: jupyter nbconvert docs/quickstart.ipynb --to html --execute --ExecutePreprocessor.timeout=6000
