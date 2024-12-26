@@ -21,14 +21,26 @@ jobs:
                 repository: tardis-sn/tardis
                 token: ${{ secrets.TARDIS_TOKEN }}
         
-          - name: Install Jupyter and tardis and pandas
-            run: |
-                pip install --upgrade pip jupyter pandas
-                pip install -e .
+          - name: Generate Cache Key
+            run: | 
+             file_hash=$(cat conda-linux-64.lock | shasum -a 256 | cut -d' ' -f1)
+             echo "file_hash=$file_hash" >> "${GITHUB_OUTPUT}"
+            id: cache-environment-key
+            shell: bash
         
-          - name: Verify Notebook File
-            run: ls docs/
-
+          - uses: mamba-org/setup-micromamba@v1
+            with:
+                environment-file: conda-linux-64.lock
+                cache-environment-key: ${{ steps.cache-environment-key.outputs.file_hash }}
+                cache-downloads-key: ${{ steps.cache-environment-key.outputs.file_hash }}
+                environment-name: tardis
+                cache-environment: true
+                cache-downloads: true
+        
+          - name: Install tardis
+            run: |
+                pip install -e .
+                  
           - name: Run Notebook
             run: jupyter nbconvert docs/quickstart.ipynb --to html --execute --ExecutePreprocessor.timeout=6000
 
@@ -36,6 +48,6 @@ jobs:
             uses: mxschmitt/action-tmate@v3
         #   - uses: actions/upload-artifact@v4
         #     with:
-        #       name: changelog
-        #       path: CHANGELOG.md
+        #       name: 
+        #       path:
     
