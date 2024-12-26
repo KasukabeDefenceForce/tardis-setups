@@ -14,17 +14,12 @@ jobs:
           - uses: actions/checkout@v4
             with:
               fetch-depth: 0
-          - name: Clone kerzendorf group-data
+          - name: Clone Tardis
             uses: actions/checkout@v4
             with:
-                repository: KasukabeDefenceForce/tardis
+                repository: tardis-sn/tardis
                 path: group-data
                 token: ${{ secrets.TARDIS_TOKEN }}
-
-          - name: Install TARDIS
-            id: install-tardis
-            run: |
-                pip install git+https://github.com/tardis-sn/tardis.git@release-2024.12.22
 
           - name: Run Notebook
             run: jupyter nbconvert docs/quickstart.ipynb --to html --execute --ExecutePreprocessor.timeout=6000
