@@ -72,3 +72,18 @@ jobs:
         if: always()
         run: |
           ls -R tardis-regression-data/tardis/spectrum/tests/test_spectrum_solver/test_spectrum_solver/
+
+  download-artifacts:
+    needs: simulation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: downloaded-artifacts
+
+      - name: Set environment variables for paths
+        run: |
+          echo "ARTIFACT_PATHS=$(find downloaded-artifacts -type f | paste -sd ':' -)" >> $GITHUB_ENV
+          echo "Paths set in environment variable ARTIFACT_PATHS:"
+          echo $ARTIFACT_PATHS
