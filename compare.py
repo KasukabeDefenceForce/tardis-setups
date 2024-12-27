@@ -633,7 +633,7 @@ class ReferenceComparer:
         return fig
     
     @classmethod
-    def compare_testspectrumsolver_hdf(custom_ref1_path=None, custom_ref2_path=None):
+    def compare_testspectrumsolver_hdf(cls, custom_ref1_path=None, custom_ref2_path=None):
         ref1_path = custom_ref1_path or "tardis/spectrum/tests/test_spectrum_solver/test_spectrum_solver/TestSpectrumSolver.h5"
         ref2_path = custom_ref2_path or "tardis/spectrum/tests/test_spectrum_solver/test_spectrum_solver/TestSpectrumSolver.h5"
         
