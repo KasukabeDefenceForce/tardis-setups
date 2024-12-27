@@ -2,8 +2,6 @@ name: Multi-Version Simulation
 on:
   workflow_dispatch:
 
-env:
-  PYTEST_FLAGS: --tardis-regression-data=${{github.workspace}}/tardis-regression-data --generate-reference
 defaults:
   run:
     shell: bash -l {0}
@@ -54,7 +52,7 @@ jobs:
       - name: Generate Tests
         run: |
            pwd
-           pytest ${{github.workspace}}/tardis/spectrum/tests/test_spectrum_solver.py ${{ env.PYTEST_FLAGS }}
+           pytest ${{github.workspace}}/tardis/spectrum/tests/test_spectrum_solver.py --tardis-regression-data=${{github.workspace}}/tardis-regression-data --generate-reference
         working-directory: tardis
 
       - uses: actions/upload-artifact@v4
