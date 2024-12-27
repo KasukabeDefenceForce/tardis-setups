@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 env:
-  PYTEST_FLAGS: --tardis-regression-data=tardis-setups/tardis-regression-data
+  PYTEST_FLAGS: --tardis-regression-data=../tardis-regression-data
 defaults:
   run:
     shell: bash -l {0}
