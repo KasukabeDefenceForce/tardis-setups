@@ -75,6 +75,8 @@ jobs:
     needs: simulation
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -101,3 +103,13 @@ jobs:
         run: |
             echo "Custom Reference 1 Path: $CUSTOM_REF1_SPECTRUM_PATH"
             echo "Custom Reference 2 Path: $CUSTOM_REF2_SPECTRUM_PATH"
+
+      - name: Execute Compare Spectrum Notebook
+        run: |
+          jupyter nbconvert --execute compare_spectrum.ipynb
+    
+      - name: Upload Notebook Output
+        uses: actions/upload-artifact@v4
+        with:
+            name: compare-spectrum-output
+            path: output_compare_spectrum.ipynb
