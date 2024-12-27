@@ -47,9 +47,7 @@ jobs:
       - name: Install tardis
         run: |
           pip install -e .
-
-      - name: Setup tmate session      
-        uses: mxschmitt/action-tmate@v3
+        working-directory: tardis
    
       - name: Generate Tests
         run: |
