@@ -118,7 +118,7 @@ jobs:
 
       - name: Execute Compare Spectrum Notebook
         run: |
-          jupyter nbconvert --execute compare_spectrum.ipynb --to notebook
+          jupyter nbconvert --execute compare_spectrum.ipynb --to notebook --inplace
     
       - name: Upload Notebook Output
         uses: actions/upload-artifact@v4
