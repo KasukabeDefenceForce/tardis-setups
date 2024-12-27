@@ -36,6 +36,7 @@ jobs:
             atom_data/kurucz_cd23_chianti_H_He.h5
           sparse-checkout-cone-mode: false
           path: tardis-regression-data
+          lfs: true
 
       - uses: mamba-org/setup-micromamba@v2
         with:
