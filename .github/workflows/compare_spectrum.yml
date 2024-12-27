@@ -98,11 +98,6 @@ jobs:
               exit 1
             fi
   
-      - name: Verify Custom Paths
-        run: |
-            echo "Custom Reference 1 Path: $CUSTOM_REF1_SPECTRUM_PATH"
-            echo "Custom Reference 2 Path: $CUSTOM_REF2_SPECTRUM_PATH"
-
       - name: Clone Tardis
         uses: actions/checkout@v4
         with:
