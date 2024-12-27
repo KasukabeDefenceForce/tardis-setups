@@ -53,9 +53,7 @@ jobs:
         run: |
           pip install -e .
         working-directory: tardis
-   
-      # - name: Setup tmate session      
-      #   uses: mxschmitt/action-tmate@v3
+  
       - name: Generate Tests
         run: |
            pwd
@@ -84,6 +82,18 @@ jobs:
 
       - name: Set environment variables for paths
         run: |
-          echo "ARTIFACT_PATHS=$(find downloaded-artifacts -type f | paste -sd ':' -)" >> $GITHUB_ENV
-          echo "Paths set in environment variable ARTIFACT_PATHS:"
-          echo $ARTIFACT_PATHS
+          # Find all downloaded artifact files and list their paths
+          ARTIFACT_PATHS=$(find downloaded-artifacts -mindepth 2 -type f | tr '\n' ':')
+          echo "ARTIFACT_PATHS=$ARTIFACT_PATHS" >> $GITHUB_ENV
+
+          # Debug output to verify paths
+          echo "Artifact paths set as environment variable:"
+          echo "$ARTIFACT_PATHS" | tr ':' '\n'
+  
+      - name: Verify Artifact Paths
+        run: |
+          echo "Artifacts found in environment variable:"
+          echo "$ARTIFACT_PATHS" | tr ':' '\n'
+
+      - name: Setup tmate session      
+        uses: mxschmitt/action-tmate@v3
