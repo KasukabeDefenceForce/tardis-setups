@@ -80,20 +80,24 @@ jobs:
         with:
           path: downloaded-artifacts
 
-      - name: Set environment variables for paths
+      - name: Set custom environment variables for paths
         run: |
-          # Find all downloaded artifact files and list their paths
-          ARTIFACT_PATHS=$(find downloaded-artifacts -mindepth 2 -type f | tr '\n' ':')
-          echo "ARTIFACT_PATHS=$ARTIFACT_PATHS" >> $GITHUB_ENV
-
-          # Debug output to verify paths
-          echo "Artifact paths set as environment variable:"
-          echo "$ARTIFACT_PATHS" | tr ':' '\n'
+            # Get the list of artifact files
+            FILES=($(find downloaded-artifacts -mindepth 2 -type f))
   
-      - name: Verify Artifact Paths
+            # Assign the paths to custom variables
+            if [ ${#FILES[@]} -ge 2 ]; then
+              echo "CUSTOM_REF1_SPECTRUM_PATH=${FILES[0]}" >> $GITHUB_ENV
+              echo "CUSTOM_REF2_SPECTRUM_PATH=${FILES[1]}" >> $GITHUB_ENV
+              echo "Custom paths set:"
+              echo "CUSTOM_REF1_SPECTRUM_PATH=${FILES[0]}"
+              echo "CUSTOM_REF2_SPECTRUM_PATH=${FILES[1]}"
+            else
+              echo "Error: Not enough artifact files found" >&2
+              exit 1
+            fi
+  
+      - name: Verify Custom Paths
         run: |
-          echo "Artifacts found in environment variable:"
-          echo "$ARTIFACT_PATHS" | tr ':' '\n'
-
-      - name: Setup tmate session      
-        uses: mxschmitt/action-tmate@v3
+            echo "Custom Reference 1 Path: $CUSTOM_REF1_SPECTRUM_PATH"
+            echo "Custom Reference 2 Path: $CUSTOM_REF2_SPECTRUM_PATH"
