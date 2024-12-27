@@ -104,6 +104,18 @@ jobs:
             echo "Custom Reference 1 Path: $CUSTOM_REF1_SPECTRUM_PATH"
             echo "Custom Reference 2 Path: $CUSTOM_REF2_SPECTRUM_PATH"
 
+      - name: Clone Tardis
+        uses: actions/checkout@v4
+        with:
+          repository: tardis-sn/tardis
+          token: ${{ secrets.TARDIS_TOKEN }}
+          path: tardis
+      
+      - uses: mamba-org/setup-micromamba@v2
+        with:
+            environment-file: ./tardis/conda-linux-64.lock
+            environment-name: tardis
+
       - name: Execute Compare Spectrum Notebook
         run: |
           jupyter nbconvert --execute compare_spectrum.ipynb
