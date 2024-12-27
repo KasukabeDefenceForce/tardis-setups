@@ -101,13 +101,13 @@ jobs:
         with:
             environment-file: ./tardis/conda-linux-64.lock
             environment-name: tardis
-
       - name: Execute Compare Spectrum Notebook
         run: |
-          jupyter nbconvert --execute compare_spectrum.ipynb --to html --inplace
+          jupyter nbconvert --execute compare_spectrum.ipynb --to html --output compare_spectrum.html
 
-      - name: Upload Notebook Output
+      - name: Upload HTML Output
         uses: actions/upload-artifact@v4
         with:
-            name: compare-spectrum-output
-            path: compare_spectrum.ipynb
+          name: compare-spectrum-output
+          path: compare_spectrum.html
+
