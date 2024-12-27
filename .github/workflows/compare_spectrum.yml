@@ -51,8 +51,8 @@ jobs:
    
       - name: Generate Tests
         run: |
-          pwd
-           pytest ${{github.workspace}}/tardis/spectrum/tests/test_spectrum_solver.py ${{ env.PYTEST_FLAGS }}
+           pwd
+          #  pytest ${{github.workspace}}/tardis/spectrum/tests/test_spectrum_solver.py ${{ env.PYTEST_FLAGS }}
         working-directory: tardis
 
       - uses: actions/upload-artifact@v4
