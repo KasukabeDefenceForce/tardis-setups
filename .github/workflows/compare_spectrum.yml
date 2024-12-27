@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 env:
-  PYTEST_FLAGS: --tardis-regression-data=../tardis-regression-data --generate-reference
+  PYTEST_FLAGS: --tardis-regression-data= ${{github.workspace}}/tardis-regression-data --generate-reference
 defaults:
   run:
     shell: bash -l {0}
