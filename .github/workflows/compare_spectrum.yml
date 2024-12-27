@@ -37,6 +37,11 @@ jobs:
           sparse-checkout-cone-mode: false
           path: tardis-regression-data
           lfs: true
+      
+      - name: Copy atom data to Downloads
+        run: |
+          mkdir -p Downloads/tardis-data
+          cp tardis-regression-data/atom_data/kurucz_cd23_chianti_H_He.h5 Downloads/tardis-data/
 
       - uses: mamba-org/setup-micromamba@v2
         with:
