@@ -41,7 +41,7 @@ jobs:
 
       - uses: mamba-org/setup-micromamba@v2
         with:
-          environment-file: conda-linux-64.lock
+          environment-file: ./tardis/conda-linux-64.lock
           environment-name: tardis
 
       - name: Install tardis
