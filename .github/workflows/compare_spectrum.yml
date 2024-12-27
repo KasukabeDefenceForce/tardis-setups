@@ -27,7 +27,8 @@ jobs:
           repository: tardis-sn/tardis
           token: ${{ secrets.TARDIS_TOKEN }}
           ref: ${{ matrix.tardis-version }}
-      
+          path: tardis
+
       - name: Get atom data files
         uses: actions/checkout@v4
         with:
@@ -36,6 +37,7 @@ jobs:
           sparse-checkout: |
             atom_data/kurucz_cd23_chianti_H_He.h5
           sparse-checkout-cone-mode: false
+          path: tardis-regression-data
 
       - uses: mamba-org/setup-micromamba@v2
         with:
