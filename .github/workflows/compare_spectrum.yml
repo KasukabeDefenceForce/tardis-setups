@@ -27,6 +27,15 @@ jobs:
           repository: tardis-sn/tardis
           token: ${{ secrets.TARDIS_TOKEN }}
           ref: ${{ matrix.tardis-version }}
+      
+      - name: Get atom data files
+        uses: actions/checkout@v4
+        with:
+          repository: tardis-sn/tardis-regression-data
+          token: ${{ secrets.TARDIS_TOKEN }}
+          sparse-checkout: |
+            atom_data/kurucz_cd23_chianti_H_He.h5
+          sparse-checkout-cone-mode: false
 
       - uses: mamba-org/setup-micromamba@v2
         with:
@@ -36,10 +45,6 @@ jobs:
       - name: Install tardis
         run: |
           pip install -e .
-
-      - name: G
-        run: |
-           mkdir -p tardis-regression-data
 
       - name: Setup tmate session      
         uses: mxschmitt/action-tmate@v3
